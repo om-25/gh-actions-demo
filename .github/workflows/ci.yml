@@ -1,3 +1,5 @@
+
+
 name: CI
 
 on:
@@ -19,41 +21,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: '20.15.0'
 
       - name: Install dependencies
         run: npm install
-        working-directory: .  # Ensure you are in the correct directory
 
       - name: Build application
         run: npm run build
-        working-directory: .  # Ensure you are in the correct directory
 
       - name: Run tests
         run: npm test
-        working-directory: .  # Ensure you are in the correct directory
 
-<<<<<<< HEAD
       - name: Run start
         run: npm start
 
-
-
-
-        
-=======
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        run: npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: .  # Ensure you are in the correct directory
->>>>>>> 0a7260dba09bdbaf609bd3a0a64b21c2037b3860
